@@ -23,10 +23,12 @@
 		"cowsay": "^1.4.0",
 		"electron-context-menu": "^0.15.1",
 		"electron-debug": "^3.0.1",
+		"electron-reload": "^1.5.0",
 		"electron-store": "^5.1.0",
 		"electron-unhandled": "^3.0.1",
 		"electron-updater": "^4.2.0",
-		"electron-util": "^0.12.2"
+		"electron-util": "^0.12.2",
+		"ewc": "0.0.1"
 	},
 	"devDependencies": {
 		"electron": "^7.1.1",
@@ -45,7 +47,7 @@
 		"releaseDraft": false
 	},
 	"build": {
-		"appId": "com.company.AppName",
+		"appId": "com.nihilo.launchit",
 		"mac": {
 			"category": "public.app-category.social-networking",
 			"darkModeSupport": true

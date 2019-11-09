@@ -1,7 +1,8 @@
 'use strict';
 const path = require('path');
-const {app, BrowserWindow, Menu} = require('electron');
-/// const {autoUpdater} = require('electron-updater');
+const {app, BrowserWindow, Menu, ipcMain, Tray} = require('electron');
+const ewc = require('ewc');
+// const {autoUpdater} = require('electron-updater');
 const {is} = require('electron-util');
 const unhandled = require('electron-unhandled');
 const debug = require('electron-debug');
@@ -9,12 +10,15 @@ const contextMenu = require('electron-context-menu');
 const config = require('./config');
 const menu = require('./menu');
 
+// Hot reload developpement
+require('electron-reload')(__dirname);
+
 unhandled();
-debug();
+//debug();
 contextMenu();
 
-// Note: Must match `build.appId` in package.json
-app.setAppUserModelId('com.company.AppName');
+// Note: Doit correspondre à ce qu'il y a dans `build.appId` dans package.json
+app.setAppUserModelId('com.nihilo.launchit');
 
 // Uncomment this before publishing your first version.
 // It's commented out as it throws an error if there are no published versions.
@@ -35,10 +39,20 @@ const createMainWindow = async () => {
 		title: app.getName(),
 		show: false,
 		width: 800,
-		height: 600
+		height: 600,
+        frame: false,
+        transparent: true,
+        backgroundColor: '#00000000',
+        webPreferences: {
+            nodeIntegration: true
+        }
 	});
-
+    ewc.setAcrylic(win, 0x14800020);
+    win.setResizable(false);
+    //win.setAlwaysOnTop(true, "floating", 1); //Desactiver pendant le devloppement
+    win.webContents.openDevTools({mode: 'detach'});
 	win.on('ready-to-show', () => {
+        win.setFullScreen(true);
 		win.show();
 	});
 
@@ -48,7 +62,7 @@ const createMainWindow = async () => {
 		mainWindow = undefined;
 	});
 
-	await win.loadFile(path.join(__dirname, 'index.html'));
+	await win.loadFile(path.join(__dirname, './app/index.html'));
 
 	return win;
 };
@@ -84,7 +98,15 @@ app.on('activate', async () => {
 	await app.whenReady();
 	Menu.setApplicationMenu(menu);
 	mainWindow = await createMainWindow();
-
+    
 	const favoriteAnimal = config.get('favoriteAnimal');
-	mainWindow.webContents.executeJavaScript(`document.querySelector('header p').textContent = 'Your favorite animal is ${favoriteAnimal}'`);
+	mainWindow.webContents.executeJavaScript(`document.querySelector('#title_name').textContent = 'name is ${favoriteAnimal}'`);
 })();
+
+
+// Icp receiver
+
+ipcMain.on('closeApp', (_) => {
+    app.quit(); // à changer pour hide
+})
+
