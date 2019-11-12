@@ -1,6 +1,16 @@
 'use strict';
 const path = require('path');
-const {app, BrowserWindow, Menu, ipcMain, Tray} = require('electron');
+//Electron Lib :
+const electron = require('electron');
+const app = electron.app
+const BrowserWindow = electron.BrowserWindow
+const Menu = electron.Menu
+const ipcMain = electron.ipcMain
+const Tray = electron.Tray
+const globalShortcut = electron.globalShortcut
+
+
+//Windows effect
 const ewc = require('ewc');
 // const {autoUpdater} = require('electron-updater');
 const {is} = require('electron-util');
@@ -9,6 +19,9 @@ const debug = require('electron-debug');
 const contextMenu = require('electron-context-menu');
 const config = require('./config');
 const menu = require('./menu');
+
+
+const isDev = require('electron-is-dev');
 
 // Hot reload developpement
 require('electron-reload')(__dirname);
@@ -19,6 +32,7 @@ contextMenu();
 
 // Note: Doit correspondre à ce qu'il y a dans `build.appId` dans package.json
 app.setAppUserModelId('com.nihilo.launchit');
+
 
 // Uncomment this before publishing your first version.
 // It's commented out as it throws an error if there are no published versions.
@@ -32,41 +46,98 @@ app.setAppUserModelId('com.nihilo.launchit');
 // }
 
 // Prevent window from being garbage collected
-let mainWindow;
+//let mainWindow;
+let tray;
+let mainWindow
+let loadingScreen;
 
-const createMainWindow = async () => {
-	const win = new BrowserWindow({
-		title: app.getName(),
-		show: false,
-		width: 800,
-		height: 600,
-        frame: false,
-        transparent: true,
-        backgroundColor: '#00000000',
-        webPreferences: {
-            nodeIntegration: true
-        }
-	});
-    ewc.setAcrylic(win, 0x14800020);
-    win.setResizable(false);
-    //win.setAlwaysOnTop(true, "floating", 1); //Desactiver pendant le devloppement
-    win.webContents.openDevTools({mode: 'detach'});
-	win.on('ready-to-show', () => {
-        win.setFullScreen(true);
-		win.show();
-	});
+const createLoadingScreen = () => {
+  /// create a browser window
+  loadingScreen = new BrowserWindow(Object.assign({
+    /// set the window height / width
+    width: 300,
+    height: 600,
+    /// remove the window frame, so it will rendered without frames
+    frame: false,
+    /// and set the transparency to true, to remove any kind of background
+    transparent: true
+  }));
+  loadingScreen.setResizable(false);
+  loadingScreen.loadURL('file://' + __dirname + '/app/splash.html');
+  loadingScreen.on('closed', () => loadingScreen = null);
+  loadingScreen.webContents.on('did-finish-load', () => {
+    loadingScreen.show();
+  });
+}
 
-	win.on('closed', () => {
-		// Dereference the window
-		// For multiple windows store them in an array
-		mainWindow = undefined;
-	});
+function createWindow() {
+  // Create the browser window.
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+		frame: false,
+		transparent: true,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+    /// set show to false, the window will be visible when to loading screen will be removed
+    show: false
+  });
 
-	await win.loadFile(path.join(__dirname, './app/index.html'));
+  // and load the index.html of the app.
+  mainWindow.loadFile('./app/intro.html')
 
-	return win;
-};
+  // Open the DevTools.
+  // mainWindow.webContents.openDevTools()
 
+  // Emitted when the window is closed.
+  mainWindow.on('closed', function () {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null
+  });
+  mainWindow.webContents.on('did-finish-load', () => {
+    // when the content has loaded, hide the loading screen and show the main window
+    if (loadingScreen) {
+      loadingScreen.close();
+    }
+		// If intro activate
+    mainWindow.show();
+  });
+}
+
+
+
+app.on('ready', () => {
+  createLoadingScreen();
+  /// add a little timeout for tutorial purposes, remember to remove this
+  setTimeout(() => {
+    createWindow();
+  }, 3000);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 // Prevent multiple instances of the app
 if (!app.requestSingleInstanceLock()) {
 	app.quit();
@@ -74,19 +145,10 @@ if (!app.requestSingleInstanceLock()) {
 
 app.on('second-instance', () => {
 	if (mainWindow) {
-		if (mainWindow.isMinimized()) {
-			mainWindow.restore();
-		}
-
 		mainWindow.show();
 	}
 });
 
-app.on('window-all-closed', () => {
-	if (!is.macos) {
-		app.quit();
-	}
-});
 
 app.on('activate', async () => {
 	if (!mainWindow) {
@@ -94,19 +156,15 @@ app.on('activate', async () => {
 	}
 });
 
-(async () => {
-	await app.whenReady();
-	Menu.setApplicationMenu(menu);
-	mainWindow = await createMainWindow();
-    
-	const favoriteAnimal = config.get('favoriteAnimal');
-	mainWindow.webContents.executeJavaScript(`document.querySelector('#title_name').textContent = 'name is ${favoriteAnimal}'`);
-})();
-
 
 // Icp receiver
 
 ipcMain.on('closeApp', (_) => {
-    app.quit(); // à changer pour hide
+    const closeIt = BrowserWindow.getFocusedWindow();
+    closeIt.close();
+})
+
+ipcMain.on('buttonSettings', (_) => {
+    settingsWindow.show()
 })
 

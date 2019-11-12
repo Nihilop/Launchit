@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>GameHUB</title>
+		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+        <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+        <link rel="stylesheet" href="assets/plugins/uikit/css/uikit.min.css">
+        <style>
+
+					body {
+							background:#ececec !important;
+							
+					}
+					* {
+							padding: 0;
+							margin: 0;
+							overflow: hidden;
+							-webkit-user-select: none;
+							-webkit-app-region: no-drag;
+					}
+					.titleBar {
+							position: absolute;
+							width: 100%;
+							height: 50px;
+							z-index: 1;
+							-webkit-user-select: none;
+							-webkit-app-region: drag;
+					}
+					.close {
+							margin-right: 20px;
+					}	
+					
+					main {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+			
+					}
+					.container {
+						position: relative;
+						flex-wrap: nowrap; 
+						width: 100%;
+						height: calc(100% - 50px);
+						top: 50px;
+					}
+					h1 {
+						position: relative;
+						display: block; 		
+						width: auto;
+						margin: auto;
+					}
+					.hide {
+						display: none !important;
+					}
+					.show {
+						display: flex !important;
+					}
+
+    </style>
+	</head>
+	<body>
+		<main>
+        <nav class="uk-navbar-container titleBar transparent" uk-navbar>
+            <div class="uk-navbar-left"></div>
+            <div class="uk-navbar-center"></div>
+            <div class="uk-navbar-right">
+                 <ul class="uk-navbar-nav">
+                    <li><a id="close" class="close" href="#"><span uk-icon="icon: close"></span></a></li>
+                </ul>
+            </div>
+        </nav>
+	
+				<div class="intro container show">
+					<h1 >Launch it</h1>
+					<button id="launchIt" class="uk-button uk-button-secondary">Démarrer</button>
+				</div>
+				<div class="intro container hide">
+					<h1 >next step</h1>
+					<button id="launchIt" class="uk-button uk-button-secondary">Démarrer</button>
+				</div>
+   	</main>
+		
+		<script>
+			window.$ = window.jQuery = require('jquery');
+			// Add wizard step
+		</script>
+        
+        <!-- SCRIPTS -->
+        <script src="./app.js"></script>
+        <script src="./assets/plugins/uikit/js/uikit.min.js"></script>
+        <script src="./assets/plugins/uikit/js/uikit-icons.min.js"></script>
+	</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>GameHUB</title>
+		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+        <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+
+        <link rel="stylesheet" href="assets/plugins/uikit/css/uikit.min.css">
+        <style>
+
+        body {
+            background: #222 !important;
+        }
+        * {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -webkit-app-region: no-drag;
+        }
+        .titleBar {
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            
+            z-index: 1;
+        }
+        .container {
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+        }
+         .button {
+            width: 100px;
+            height: 100px;
+            float: right;
+            margin: 0 5px;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        .button svg {
+            fill: black;
+            
+            transform: translate(15%, 15%);
+        }
+
+    </style>
+	</head>
+	<body>
+  	<nav class="uk-navbar-container titleBar transparent" uk-navbar>
+    	<div class="uk-navbar-left">...</div>
+      <div class="uk-navbar-center">...</div>
+      <div class="uk-navbar-right">
+      	<ul class="uk-navbar-nav">
+        	<li class="uk-active"><a class="buttonSettings" href="#"><span uk-icon="icon: settings"></span></a></li>
+          <li><a id="close" class="close" href="#"><span uk-icon="icon: close"></span></a></li>
+        </ul>
+      </div>
+    </nav>
+		<div class="container">
+		  Tray
+		</div>
+        
+        
+        <!-- SCRIPTS -->
+        <script src="./app.js"></script>
+        <script src="./assets/js/script.js"></script>
+				<script src="./assets/plugins/uikit/js/uikit.min.js"></script>
+        <script src="./assets/plugins/uikit/js/uikit-icons.min.js"></script>
+	</body>
+</html>

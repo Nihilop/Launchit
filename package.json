@@ -20,15 +20,22 @@
 		"release": "np"
 	},
 	"dependencies": {
+		"@trodi/electron-splashscreen": "^0.3.4",
 		"cowsay": "^1.4.0",
 		"electron-context-menu": "^0.15.1",
 		"electron-debug": "^3.0.1",
+		"electron-is-dev": "^1.1.0",
+		"electron-plugin": "^1.1.59",
 		"electron-reload": "^1.5.0",
 		"electron-store": "^5.1.0",
+		"electron-tray-window": "^1.2.5",
 		"electron-unhandled": "^3.0.1",
 		"electron-updater": "^4.2.0",
 		"electron-util": "^0.12.2",
-		"ewc": "0.0.1"
+		"ewc": "0.0.1",
+		"jquery": "^3.4.1",
+		"jquery-ui": "^1.12.1",
+		"jsdom": "^15.2.1"
 	},
 	"devDependencies": {
 		"electron": "^7.1.1",

@@ -5,6 +5,7 @@
 		<title>GameHUB</title>
 		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
         <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+        <link rel="stylesheet" href="assets/plugins/uikit/css/uikit.min.css">
         <style>
 
         body {
@@ -48,36 +49,114 @@
     </style>
 	</head>
 	<body>
-        <div class="titleBar">
-            <div class="button" id="close">
-                <!-- <img src="public/assets/img/close_w.png"> -->
-                <svg viewBox="0 0 35 35" version="1.1">
-                    <path d="M19.1,2.7c-0.5,0-1,0.2-1.4,0.6L4.3,16.7c-0.8,0.8-0.8,2,0,2.8l0.2,0.2c0.4,0.4,0.9,0.6,1.4,0.6s1-0.2,1.4-0.6L20.7,6.3    c0.8-0.8,0.8-2,0-2.8l-0.2-0.2C20.2,2.9,19.6,2.7,19.1,2.7L19.1,2.7z"/>
-                    <path d="M5.9,2.7c-0.5,0-1,0.2-1.4,0.6L4.3,3.5c-0.8,0.8-0.8,2,0,2.8l13.4,13.4c0.4,0.4,0.9,0.6,1.4,0.6s1-0.2,1.4-0.6l0.2-0.2    c0.8-0.8,0.8-2,0-2.8L7.3,3.3C6.9,2.9,6.4,2.7,5.9,2.7L5.9,2.7z"/>
-                </svg> 
+        <nav class="uk-navbar-container titleBar transparent" uk-navbar>
+            <div class="uk-navbar-left">...</div>
+            <div class="uk-navbar-center">...</div>
+            <div class="uk-navbar-right">
+                 <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a class="buttonSettings" href="#"><span uk-icon="icon: settings"></span></a></li>
+                    <li><a id="close" class="close" href="#"><span uk-icon="icon: close"></span></a></li>
+                </ul>
             </div>
-        </div>
-		<div class="container">
-		  <div id="grid-H" class="row">
-            <div class="type-2 card">
-                <div class="wrapper">
-                  <a class="launch-app" href="#app">    
-                      <div class="background"></div>    
-                      <div class="header">
-                        <ul class="menu-content">
-                          <li>
-                            <a href="#" class="fa fa-star-o"></a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="data">
-                        <div class="content">
-                          <h1 id="title_name" class="title"></h1>
-                        </div>
-                      </div>
-                  </a>      
-                </div>
-              </div>
+        </nav>
+
+		<div class="container uk-animation-slide-bottom">
+            <div id="grid-H" class="scroll" uk-scrollspy="target: > div; cls: uk-animation-slide-bottom; delay: 100">
+                <div class="type-2 card">
+                    <div class="wrapper">
+                      <a class="launch-app" href="#app">    
+                          <div class="background"></div>    
+                          <div class="header">
+                            <ul class="menu-content">
+                              <li>
+                                <a href="#" class="fa fa-star-o"></a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="data">
+                            <div class="content">
+                              <h1 id="title_name" class="title"></h1>
+                            </div>
+                          </div>
+                      </a>      
+                    </div>
+                  </div>
+                <div class="type-2 card">
+                    <div class="wrapper">
+                      <a class="launch-app" href="#app">    
+                          <div class="background"></div>    
+                          <div class="header">
+                            <ul class="menu-content">
+                              <li>
+                                <a href="#" class="fa fa-star-o"></a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="data">
+                            <div class="content">
+                              <h1 id="title_name" class="title"></h1>
+                            </div>
+                          </div>
+                      </a>      
+                    </div>
+                  </div>
+                <div class="type-2 card">
+                    <div class="wrapper">
+                      <a class="launch-app" href="#app">    
+                          <div class="background"></div>    
+                          <div class="header">
+                            <ul class="menu-content">
+                              <li>
+                                <a href="#" class="fa fa-star-o"></a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="data">
+                            <div class="content">
+                              <h1 id="title_name" class="title"></h1>
+                            </div>
+                          </div>
+                      </a>      
+                    </div>
+                  </div>
+                <div class="type-2 card">
+                    <div class="wrapper">
+                      <a class="launch-app" href="#app">    
+                          <div class="background"></div>    
+                          <div class="header">
+                            <ul class="menu-content">
+                              <li>
+                                <a href="#" class="fa fa-star-o"></a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="data">
+                            <div class="content">
+                              <h1 id="title_name" class="title"></h1>
+                            </div>
+                          </div>
+                      </a>      
+                    </div>
+                  </div>
+                <div class="type-2 card">
+                    <div class="wrapper">
+                      <a class="launch-app" href="#app">    
+                          <div class="background"></div>    
+                          <div class="header">
+                            <ul class="menu-content">
+                              <li>
+                                <a href="#" class="fa fa-star-o"></a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="data">
+                            <div class="content">
+                              <h1 id="title_name" class="title"></h1>
+                            </div>
+                          </div>
+                      </a>      
+                    </div>
+                  </div>
             </div>
 		</div>
         
@@ -85,5 +164,7 @@
         <!-- SCRIPTS -->
         <script src="./app.js"></script>
         <script src="./assets/js/script.js"></script>
+        <script src="./assets/plugins/uikit/js/uikit.min.js"></script>
+        <script src="./assets/plugins/uikit/js/uikit-icons.min.js"></script>
 	</body>
 </html>

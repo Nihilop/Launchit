@@ -1,19 +1,11 @@
-@keyframes fadein {
-    from {
-        opacity: 0;
-        }
-    to {
-        opacity: 1;
-        }
-}
-
-.app {
-    animation: fadein 5s;
-}
-
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 * {
   box-sizing: border-box;
+}
+
+
+body, html {
+    background: transparent !important;
 }
 
 body {
@@ -21,11 +13,23 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     height: 100vh;
-    font-family: "Open Sans", sans-serif;
     overflow: hidden;
     margin: 0;
     padding: 0;
-    cursor: url('../img/cursor/main.png'), auto;	
+    font-family: -apple-system,
+		BlinkMacSystemFont,
+		'Segoe UI',
+		Roboto,
+		Oxygen-Sans,
+		Ubuntu,
+		Cantarell,
+		'Helvetica Neue',
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji',
+		'Segoe UI Symbol';
+	text-rendering: optimizeLegibility;
+	font-feature-settings: 'liga', 'clig', 'kern';    
 }
 
 a {
@@ -36,31 +40,37 @@ h1 {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
 }
+
+
+.transparent {
+    background: transparent !important;
+}
+
 .container {
     display: flex; /* contexte sur le parent */
     flex-direction: column; /* direction d'affichage verticale */
     justify-content: center; /* alignement vertical */
-    height: 100vh;
-    width: 100%;
+
     margin: 0;
     padding: 0;
 
 
 }
 
-.row {
+.scroll {
     position: relative;
+    display: flex !important; 
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch;
+    
     width: 80%;
-    height: auto;
-    display: grid;
-
-    grid-template-columns: repeat(40, 1fr);
-
-    overflow: hidden;
     margin: auto;
-
 }
 
+.scroll::-webkit-scrollbar {
+    display: none; 
+}
 
 .card {
     position: relative;

@@ -3,6 +3,14 @@ const Store = require('electron-store');
 
 module.exports = new Store({
 	defaults: {
-		favoriteAnimal: '🦄'
+        id: '1',
+        name: 'Overwatch',
+        category: 'Game',
+        shortcut: {
+            path: '...',
+            iconPath: '...',
+            backgroundPath: '...',
+            bannerPath: '...'
+        }
 	}
 });
