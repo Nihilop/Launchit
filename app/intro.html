@@ -3,91 +3,134 @@
 	<head>
 		<meta charset="utf-8">
 		<title>GameHUB</title>
-		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+
         <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
         <link rel="stylesheet" href="assets/plugins/uikit/css/uikit.min.css">
+        <link rel="stylesheet" href="../node_modules/jquery.steps/dist/jquery-steps.css">
         <style>
 
-					body {
-							background:#ececec !important;
-							
-					}
-					* {
-							padding: 0;
-							margin: 0;
-							overflow: hidden;
-							-webkit-user-select: none;
-							-webkit-app-region: no-drag;
-					}
-					.titleBar {
-							position: absolute;
-							width: 100%;
-							height: 50px;
-							z-index: 1;
-							-webkit-user-select: none;
-							-webkit-app-region: drag;
-					}
-					.close {
-							margin-right: 20px;
-					}	
-					
-					main {
-						position: absolute;
-						width: 100%;
-						height: 100%;
-			
-					}
-					.container {
-						position: relative;
-						flex-wrap: nowrap; 
-						width: 100%;
-						height: calc(100% - 50px);
-						top: 50px;
-					}
-					h1 {
-						position: relative;
-						display: block; 		
-						width: auto;
-						margin: auto;
-					}
-					.hide {
-						display: none !important;
-					}
-					.show {
-						display: flex !important;
-					}
+			body {
+                position: relative;
+                width: 100%;
+                height: 100%;
+				background:#ececec !important;
+                overflow: hidden;
+                border: 2px solid rgba(34,34,34,0.02);
+                -webkit-user-select: none;  
+                -webkit-app-region: drag
+			}
+            * {
+                margin: 0;
+                padding: 0;
+            }
 
+            #close {
+                position: absolute;
+                top: 24px;
+                right: 24px;
+                z-index: 9;
+                cursor: pointer;
+            }
+            .step-app {
+                position: relative;
+                width: 100%;
+                height:100vh;
+            }
+            
+            .step-tab-panel {
+                margin: auto;
+            }
+   
+            .step-content {
+                position: relative;
+                display: flex;
+                width: 100%;
+                height: 100%;
+                border: none !important
+            }
+            .step-footer {
+                position: absolute;
+                bottom: 10px;
+                display: flex;
+                width: 100%;
+                height: 40px;
+                margin: 0 !important;
+            }
+            .custom_btn {
+                position: absolute;
+                right: 24px;
+                bottom: 24px;
+            }
+            .step-steps {
+                display: none !important
+            }
+            
+            .no-drag {
+                -webkit-app-region: no-drag
+            }
+   
     </style>
 	</head>
 	<body>
-		<main>
-        <nav class="uk-navbar-container titleBar transparent" uk-navbar>
-            <div class="uk-navbar-left"></div>
-            <div class="uk-navbar-center"></div>
-            <div class="uk-navbar-right">
-                 <ul class="uk-navbar-nav">
-                    <li><a id="close" class="close" href="#"><span uk-icon="icon: close"></span></a></li>
-                </ul>
+		<span id="close" class="no-drag" uk-icon="icon: close"></span>
+
+        <!-- WIZARD -->
+        <div id="steps" class="step-app">    
+            <div class="step-content">
+                <div class="step-tab-panel" id="step1">
+                    <h1>Launchit</h1>
+                </div>
+                <div class="step-tab-panel" id="step2">
+                    <h2>Ajouter simplement et rapidement des raccourcis</h2>
+                </div>
+                <div class="step-tab-panel" id="step3">
+                    <h1>Essayez !</h1>
+                </div>
             </div>
-        </nav>
-	
-				<div class="intro container show">
-					<h1 >Launch it</h1>
-					<button id="launchIt" class="uk-button uk-button-secondary">Démarrer</button>
-				</div>
-				<div class="intro container hide">
-					<h1 >next step</h1>
-					<button id="launchIt" class="uk-button uk-button-secondary">Démarrer</button>
-				</div>
-   	</main>
+            <ul class="step-steps">
+                <li><a href="#step1">1</a></li>
+                <li><a href="#step2">2</a></li>
+                <li><a href="#step3">3</a></li>
+            </ul>
+            <div class="step-footer">
+                <button class=" no-drag uk-button uk-button-secondary custom_btn" data-direction="next">Suivant</button>
+                <button class="no-drag uk-button uk-button-secondary custom_btn" data-direction="finish">Terminé</button>
+            </div>
+        </div>
+        <!-- ANIMATION -->
+        <div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+        </div>      
+        
+
 		
 		<script>
-			window.$ = window.jQuery = require('jquery');
+			$ = require('jquery');
+            steps = require('jquery.steps')
 			// Add wizard step
+            $('#steps').steps({
+                onFinish: function () {  alert('complete'); }
+            });
+            
+            //alert('complete');
+
 		</script>
         
         <!-- SCRIPTS -->
         <script src="./app.js"></script>
+        <script src="../node_modules/jquery.steps/dist/jquery-steps.js"></script>
         <script src="./assets/plugins/uikit/js/uikit.min.js"></script>
         <script src="./assets/plugins/uikit/js/uikit-icons.min.js"></script>
 	</body>

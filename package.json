@@ -22,6 +22,7 @@
 	"dependencies": {
 		"@trodi/electron-splashscreen": "^0.3.4",
 		"cowsay": "^1.4.0",
+		"electron-app-settings": "^1.0.2",
 		"electron-context-menu": "^0.15.1",
 		"electron-debug": "^3.0.1",
 		"electron-is-dev": "^1.1.0",
@@ -35,6 +36,7 @@
 		"ewc": "0.0.1",
 		"jquery": "^3.4.1",
 		"jquery-ui": "^1.12.1",
+		"jquery.steps": "^1.0.2",
 		"jsdom": "^15.2.1"
 	},
 	"devDependencies": {
