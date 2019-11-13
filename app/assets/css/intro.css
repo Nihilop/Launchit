@@ -1,0 +1,83 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+* {
+  box-sizing: border-box;
+}
+
+
+body, html {
+    background:transparent !important;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system,
+		BlinkMacSystemFont,
+		'Segoe UI',
+		Roboto,
+		Oxygen-Sans,
+		Ubuntu,
+		Cantarell,
+		'Helvetica Neue',
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji',
+		'Segoe UI Symbol';
+	text-rendering: optimizeLegibility;
+	font-feature-settings: 'liga', 'clig', 'kern'; 
+	-webkit-user-select: none;  
+  -webkit-app-region: drag;
+	border: 2px solid rgba(34,34,34,0.02);
+	background: #ececec !important;
+}
+
+#close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 9;
+  cursor: pointer;
+}
+.step-app {
+  position: relative;
+  width: 100%;
+  height:100vh;
+}
+            
+.step-tab-panel {
+  margin: auto;
+}
+   
+.step-content {
+	position: relative;
+	display: flex;
+	width: 100%;
+	height: 100%;
+	border: none !important
+}
+.step-footer {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  width: 100%;
+  height: 40px;
+  margin: 0 !important;
+}
+.custom_btn {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+}
+.step-steps {
+	display: none !important
+}
+            
+.no-drag {
+	-webkit-app-region: no-drag
+}
+
+         

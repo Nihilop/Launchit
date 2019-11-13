@@ -2,102 +2,38 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>GameHUB</title>
-
-        <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-        <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
-        <link rel="stylesheet" href="assets/plugins/uikit/css/uikit.min.css">
-        <link rel="stylesheet" href="../node_modules/jquery.steps/dist/jquery-steps.css">
-        <style>
-
-			body {
-                position: relative;
-                width: 100%;
-                height: 100%;
-				background:#ececec !important;
-                overflow: hidden;
-                border: 2px solid rgba(34,34,34,0.02);
-                -webkit-user-select: none;  
-                -webkit-app-region: drag
-			}
-            * {
-                margin: 0;
-                padding: 0;
-            }
-
-            #close {
-                position: absolute;
-                top: 24px;
-                right: 24px;
-                z-index: 9;
-                cursor: pointer;
-            }
-            .step-app {
-                position: relative;
-                width: 100%;
-                height:100vh;
-            }
-            
-            .step-tab-panel {
-                margin: auto;
-            }
-   
-            .step-content {
-                position: relative;
-                display: flex;
-                width: 100%;
-                height: 100%;
-                border: none !important
-            }
-            .step-footer {
-                position: absolute;
-                bottom: 10px;
-                display: flex;
-                width: 100%;
-                height: 40px;
-                margin: 0 !important;
-            }
-            .custom_btn {
-                position: absolute;
-                right: 24px;
-                bottom: 24px;
-            }
-            .step-steps {
-                display: none !important
-            }
-            
-            .no-drag {
-                -webkit-app-region: no-drag
-            }
-   
-    </style>
+		<title>Launchit</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/intro.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
+    <link rel="stylesheet" href="assets/plugins/uikit/css/uikit.min.css">
+  	<link rel="stylesheet" href="../node_modules/jquery.steps/dist/jquery-steps.css">
 	</head>
 	<body>
 		<span id="close" class="no-drag" uk-icon="icon: close"></span>
 
-        <!-- WIZARD -->
-        <div id="steps" class="step-app">    
-            <div class="step-content">
-                <div class="step-tab-panel" id="step1">
-                    <h1>Launchit</h1>
-                </div>
-                <div class="step-tab-panel" id="step2">
-                    <h2>Ajouter simplement et rapidement des raccourcis</h2>
-                </div>
-                <div class="step-tab-panel" id="step3">
-                    <h1>Essayez !</h1>
-                </div>
-            </div>
-            <ul class="step-steps">
-                <li><a href="#step1">1</a></li>
-                <li><a href="#step2">2</a></li>
-                <li><a href="#step3">3</a></li>
-            </ul>
-            <div class="step-footer">
-                <button class=" no-drag uk-button uk-button-secondary custom_btn" data-direction="next">Suivant</button>
-                <button class="no-drag uk-button uk-button-secondary custom_btn" data-direction="finish">Terminé</button>
-            </div>
+    <!-- WIZARD -->
+    <div id="steps" class="step-app">    
+			<div class="step-content">
+      	<div class="step-tab-panel" id="step1">
+        	<h1>Launchit</h1>
         </div>
+        <div class="step-tab-panel" id="step2">
+          <h2>Ajouter simplement et rapidement des raccourcis</h2>
+        </div>
+        <div class="step-tab-panel" id="step3">
+        	<h1>Essayez !</h1>
+        </div>
+      </div>
+      <ul class="step-steps">
+        <li><a href="#step1">1</a></li>
+        <li><a href="#step2">2</a></li>
+      	<li><a href="#step3">3</a></li>
+      </ul>
+      <div class="step-footer">
+        <button class=" no-drag uk-button uk-button-secondary custom_btn" data-direction="next">Suivant</button>
+				<button class="no-drag uk-button uk-button-secondary custom_btn" data-direction="finish">Terminé</button>
+      </div>
+    </div>
         <!-- ANIMATION -->
         <div class="area" >
             <ul class="circles">

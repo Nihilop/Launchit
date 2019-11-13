@@ -1,36 +1,77 @@
-const { remote, app, ipcRenderer } = require("electron");
-const pluginManager = require(`electron-plugin`);
-const { Menu, BrowserWindow } = remote;
+
+const electron = require('electron');
+const remote = electron.remote
+const app = electron.app
+const ipcRenderer = electron.ipcRenderer
+
+//const find = require("find-process");
+//const ps = require("ps-node");
+const isDev = require("electron-is-dev");
+
+const { Tray, Menu, BrowserWindow } = remote;
 const url = require("url");
 const path = require("path");
+const { execFile } = require("child_process");
+
+//const Store = require("electron-store");
+//const pluginManager = require(`electron-plugin`);
 
 
 
 const Store = require("electron-store");
 const config = new Store({
-  projectName: "GameHUB"
+  projectName: "Launchit"
 });
 
-let config = { 
-	installPath: `${__dirname}/extensions`,
-	plugins : {
-		"demo": "0.0.2"
-  }
-},
-extensionPoint = {
-	app: 'anything you want to use as exstention point'
-}
+
+//let config = { 
+//	installPath: `${__dirname}/extensions`,
+//	plugins : {
+//		"demo": "0.0.2"
+//  }
+//},
+//extensionPoint = {
+//	app: 'anything you want to use as exstention point'
+//}
+
+// Create menu 
+
+let tray = new Tray(
+  path.join(
+    __dirname,
+    `./${
+      process.platform == "darwin" ? "tray/icon.png" : "tray.png"
+    }`
+  )
+);
+
+const navigationTray = [
+			{
+				label: "Afficher l'Overlay",
+				click() {	createAppWindow() }
+			},
+			{
+				label: "Options",
+				click() {	createIntroWindow() }
+			},
+			{ type: 'separator' },
+			{
+				label: 'Web site',
+				click() {	shell.openExternal('https://github.com/Nihilop/Launchit') }
+			},
+			{
+				label: 'Quitter',
+				click() {	app.quit() }
+			}
+]
 
 
-
-createWindow = () => {
+createAppWindow = () => {
 
     // Layout window
     const appPath = path.join(__dirname, './app/index.html')
     const appWindow = new BrowserWindow({
 			title: app.getName(),
-			width: 800,
-			height: 600,
 			frame: false,
       show: false,
       transparent: true,
@@ -60,46 +101,7 @@ createWindow = () => {
 
 }
 
-// Another windows create
 
-let settingsWindowOpened = true;
-
-canShowIntro = () => {
-  const status = config.get("showIntro");
-  return status == null ? true : status;
-};
-
-// creates an intro window
-createIntroWindow = () => {
-  let win = new remote.BrowserWindow({
-    width: 600,
-    height: 400,
-    show: false,
-    frame: false,
-    hasShadow: false,
-    transparent: true,
-    maximizable: false,
-    minimizable: false,
-    skipTaskbar: true,
-    resizable: false,
-    webPreferences: {
-      devTools: false,
-      nodeIntegration: true
-    }
-  });
-
-  win.loadURL(
-    url.format({
-      pathname: path.join(__dirname, "app/splash.html"),
-      protocol: "file:",
-      slashes: true
-    })
-  );
-  win.on("closed", () => {});
-  win.once("ready-to-show", () => {
-    win.show();
-  });
-};
 //show intro on startup.
 if (canShowIntro()) createIntroWindow();
 
@@ -113,7 +115,7 @@ createSettingsWindow = () => {
     resizable: true,
     frame: false,
     webPreferences: {
-      // devTools: true,
+      devTools: false,
       nodeIntegration: true
     }
   });
@@ -136,7 +138,14 @@ createSettingsWindow = () => {
   });
 };
 
+
+function buildTrayMenu() {
+  let trayMenu = Menu.buildFromTemplate(navigationTray);
+  tray.setContextMenu(trayMenu);
+}  
+
 pluginManager.load(config, extensionPoint)
+buildTrayMenu();
 
 
 

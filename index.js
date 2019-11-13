@@ -18,7 +18,7 @@ const unhandled = require('electron-unhandled');
 const debug = require('electron-debug');
 const contextMenu = require('electron-context-menu');
 const config = require('./config');
-const menu = require('./menu');
+const navigationTray = require('./preload');
 
 
 const isDev = require('electron-is-dev');
@@ -51,6 +51,8 @@ let tray;
 let mainWindow
 let loadingScreen;
 
+
+
 const createLoadingScreen = () => {
   /// create a browser window
   loadingScreen = new BrowserWindow(Object.assign({
@@ -60,13 +62,18 @@ const createLoadingScreen = () => {
     /// remove the window frame, so it will rendered without frames
     frame: false,
     /// and set the transparency to true, to remove any kind of background
-    transparent: true
+    transparent: true,
+		webPreferences: {
+      nodeIntegration: true,
+			preload: path.join(__dirname, 'preload.js'),
+    },
   }));
   loadingScreen.setResizable(false);
   loadingScreen.loadURL('file://' + __dirname + '/app/splash.html');
   loadingScreen.on('closed', () => loadingScreen = null);
   loadingScreen.webContents.on('did-finish-load', () => {
     loadingScreen.show();
+		console.log('preload & splash ok')
   });
 }
 
@@ -110,6 +117,16 @@ function createWindow() {
 
 
 app.on('ready', () => {
+	
+	tray = new Tray('./tray.png')
+  const contextMenu = Menu.buildFromTemplate(navigationTray())
+
+  // Fait un changement au menu contextuel
+  contextMenu.items[1].checked = false
+
+  // Appelé à nouveau pour Linux car nous avons modifié le menu contextuel
+  tray.setContextMenu(contextMenu)
+	
   createLoadingScreen();
   /// add a little timeout for tutorial purposes, remember to remove this
   setTimeout(() => {
